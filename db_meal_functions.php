@@ -15,7 +15,7 @@ function echo_prettymeals($ids) {
 		}
 		if (!$res) { die ("99B; select failed on ids $ids"); }
 		$found = 0;
-		$meal_to_edit_id = $_POST['showeditmeal'];
+		$meal_to_edit_id = $_POST['showeditmeal']??null;
 		foreach($res as $row) {
 			if ($row[0] == $meal_to_edit_id) {
 				echo_editmeal_1($row);
@@ -62,7 +62,7 @@ function try_newmeal_from_post() {
 	}
 }
 function try_savemeal_from_post() {
-	$saveid = $_POST['save_meal'];
+	$saveid = $_POST['save_meal']??null;
 	if ($saveid) {
 		$name = $_POST['name'];
 		$ingrd = $_POST['ingrd'];
@@ -99,7 +99,7 @@ function echo_editmeal_1($row) {
 	echo "<p>Ingredient list</p><textarea name='ingrd'>$ingrd</textarea><br/>\n";
 	echo "<p>Additional notes</p><textarea name='notes'>$notes</textarea><br/>\n";
 	echo "<input type='hidden' name='save_meal' value='$id'>\n";
-	if ($_POST['browse']) { echo "<input type='hidden' name='browse' value=1>"; }
+	if (isset($_POST['browse'])) { echo "<input type='hidden' name='browse' value=1>"; }
 	echo "<input type='submit' value='Save Changes'>\n";
 	echo "</form>\n";
 }

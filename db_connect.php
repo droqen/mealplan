@@ -4,13 +4,13 @@ require_once '.password.php';
 
 // check user login
 session_start();
-if ($_POST["logout"]) {
+if ($_POST["logout"]??null) {
 	$_SESSION["user"]="";
 	require_once 'echo_login_form.php';
 	die();
-} else if ($_SESSION["user"]=="droqen") {
+} else if (($_SESSION["user"]??null) =="droqen") {
 	// yay!
-} else if ($_POST["password"]==$PASSWORD) {
+} else if (($_POST["password"]??null)==$PASSWORD) {
 	$_SESSION["user"]="droqen"; // yay!
 } else {
 	require_once 'echo_login_form.php';
